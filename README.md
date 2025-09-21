@@ -13,6 +13,9 @@ After reaching final states, it applies filters on apartments based on the attri
 This is a static page built with React and JavaScript, with styling handled via Tailwind CSS.
 
 ## Setup
+You can directly test the application here: https://sameergopali.github.io/chatbot/
+
+Alternatively, follow steps below for local deployment:
 1. Download and install node.js and npm for your platform from [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
 2. **Clone the repository**
