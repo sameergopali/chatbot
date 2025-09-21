@@ -25,9 +25,19 @@ class StateMachine {
       // Get keywords for this event
       const keywords = stateDef.keywords?.[event] || [];
       // Check if any keyword is present in the input
-      if (keywords.some(k => input.toLowerCase().includes(k))) {
-        matches.push({ event, next })
+      if (keywords.length > 0) {
+        // 1. Create a regex pattern from the keywords.
+        // We escape special regex characters in keywords just in case (e.g., '$', '+')
+        // and join them with the OR '|' operator.
+        const escapedKeywords = keywords.map(k => k.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'));
+        const pattern = new RegExp(`\\b(${escapedKeywords.join('|')})\\b`, 'i');
+
+        // 2. Test the user's input against the pattern.
+        if (pattern.test(input)) {
+          matches.push({ event, next });
+        }
       }
+
     }
     // If exactly one match, transition to the next state
     if (matches.length===1){

@@ -42,7 +42,7 @@ export function useStateMachine() {
   const machineRef = useRef(createInitialState().machine);
   const [messages, setMessages] = useState(() => createInitialState().messages);
   const stuckCountRef = useRef(0);
-  const STUCK_THRESHOLD = 5;
+  const STUCK_THRESHOLD = 3;
   const currentStateRef = useRef(machineRef.current.currState);
   const userRef = useRef({})
 
@@ -68,7 +68,7 @@ export function useStateMachine() {
       stuckCountRef.current = 0;
     }
     currentStateRef.current = newState;
-    if (stuckCountRef.current >= STUCK_THRESHOLD) {
+    if (stuckCountRef.current > STUCK_THRESHOLD) {
       // Manually transition to a help state.
       machineRef.current.send("help");
       stuckCountRef.current = 0; // Reset the counter
@@ -78,7 +78,7 @@ export function useStateMachine() {
 
    
     let botText = machineRef.current.message;
-
+    
     if (machineRef.current.isTerminal() && stuckCountRef.current===0) {
       const results = getApartmentsForTerminalState(machineRef.current.currState);
       if (results && results.length > 0) {
@@ -100,7 +100,7 @@ export function useStateMachine() {
       sender: "bot",
       timestamp: new Date(),
     };
-
+    
     
     // Update the messages state
     setMessages((prevMessages) => [...prevMessages, userMessage, botMessage]);

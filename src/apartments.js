@@ -1,11 +1,13 @@
 const commonTransitions = {
   on: {
     HELP: "help",
+    START: "root"
   },
   keywords: {
     HELP: ["human", "support", "help"],
     YES: ["yes", "ok", "alright", "yup"],
     NO: ["no", "nope"],
+    START: ["restart", "reset", "start", "begin"]
   }
 };
 
@@ -15,7 +17,7 @@ export const apartmentFinderMachine = {
   states: {
     root: {
       message: "Hi, I’m here to help you find the right apartment. Are you ready to start?",
-      fallback: "I’m sorry, I didn’t understand you. Please type yes to begin.",
+      fallback: "I’m sorry, I didn’t understand you. I can only assist you to find apartment. Please type yes to begin.",
       on: { YES: "askBudget", NO: "help", ...commonTransitions.on },
       keywords: { ...commonTransitions.keywords },
       terminal: false
@@ -26,11 +28,11 @@ export const apartmentFinderMachine = {
     // ================================
     askBudget: {
       message: "What is your monthly budget range? Low-end (<$1000), mid-range ($1000-$2000), or high-end ($2000+)?",
-      fallback: "I’m sorry, please answer with low, mid, or high.",
+      fallback: "I’m sorry, I didn't understand you. Please select one: low, mid, or high.",
       on: { LOW: "lowRoommates", MID: "midModernOrOld", HIGH: "highAmenities", ...commonTransitions.on },
       keywords: {
-        LOW: ["cheap", "budget", "low", "affordable", "under 1000"],
-        MID: ["mid", "average", "normal", "1000", "2000"],
+        LOW: ["cheap", "budget", "low", "affordable", "under 1000", "<$1000"],
+        MID: ["mid", "average", "normal", "1000-2000",],
         HIGH: ["high", "expensive", "premium", "luxury", "2000+"],
         ...commonTransitions.keywords
       },
@@ -42,7 +44,7 @@ export const apartmentFinderMachine = {
     // ================================
     lowRoommates: {
       message: "Would you share the apartment with roommates?",
-      fallback: "Please answer yes or no.",
+      fallback: "I am sorry, I didn't get that. Please answer yes or no.",
       on: { YES: "recommendCoLiving", NO: "lowDowntownOrSuburb", ...commonTransitions.on },
       keywords: { ...commonTransitions.keywords },
       terminal: false
@@ -50,7 +52,7 @@ export const apartmentFinderMachine = {
 
     lowDowntownOrSuburb: {
       message: "Do you need to be near downtown, or is the suburb okay?",
-      fallback: "Please answer downtown or suburb.",
+      fallback: "I am sorry, I didn't get that. Please answer downtown or suburb.",
       on: { DOWNTOWN: "recommendMicroStudent", SUBURB: "lowOldBuilding", ...commonTransitions.on },
       keywords: {
         DOWNTOWN: ["downtown", "city", "center", "urban"],
@@ -62,7 +64,7 @@ export const apartmentFinderMachine = {
 
     lowOldBuilding: {
       message: "Would you consider older buildings with fewer amenities to save money?",
-      fallback: "Please answer yes or no.",
+      fallback: "I am sorry, I didn't get that. Please answer yes or no.",
       on: { YES: "recommendOlderStock", NO: "recommendBudgetModern", ...commonTransitions.on },
       keywords: { ...commonTransitions.keywords },
       terminal: false
@@ -103,7 +105,7 @@ export const apartmentFinderMachine = {
     // ================================
     midModernOrOld: {
       message: "Do you prefer a modern building or older charm?",
-      fallback: "Please answer modern or old.",
+      fallback: "I am sorry, I didn't get that. Please answer modern or old.",
       on: { MODERN: "midLaundry", OLD: "midLaundry", ...commonTransitions.on },
       keywords: {
         MODERN: ["modern", "new", "updated"],
@@ -115,7 +117,7 @@ export const apartmentFinderMachine = {
 
     midLaundry: {
       message: "Do you want in-unit laundry?",
-      fallback: "Please answer yes or no.",
+      fallback: "I am sorry, I didn't get that. Please answer yes or no.",
       on: { YES: "midTransportOrParking", NO: "midTransportOrParking", ...commonTransitions.on },
       keywords: { ...commonTransitions.keywords },
       terminal: false
@@ -123,7 +125,7 @@ export const apartmentFinderMachine = {
 
     midTransportOrParking: {
       message: "Do you prefer being closer to public transport or having a parking space?",
-      fallback: "Please answer transport or parking.",
+      fallback: "I am sorry, I didn't get that. Please answer transport or parking.",
       on: { TRANSPORT: "recommendMidTransport", PARKING: "recommendMidParking", ...commonTransitions.on },
       keywords: {
         TRANSPORT: ["transport", "metro", "subway", "bus", "train"],
@@ -154,7 +156,7 @@ export const apartmentFinderMachine = {
     // ================================
     highAmenities: {
       message: "Are you looking for all amenities included? (pool, gym, concierge, etc.)",
-      fallback: "Please answer yes or no.",
+      fallback: "I am sorry, I didn't get that. Please answer yes or no.",
       on: { YES: "highSpaceOrLocation", NO: "highSpaceOrLocation", ...commonTransitions.on },
       keywords: { ...commonTransitions.keywords },
       terminal: false
@@ -162,7 +164,7 @@ export const apartmentFinderMachine = {
 
     highSpaceOrLocation: {
       message: "Do you prioritize space or location?",
-      fallback: "Please answer space or location.",
+      fallback: "I am sorry, I didn't get that. Please answer space or location.",
       on: { SPACE: "highLeaseFlexibility", LOCATION: "highLeaseFlexibility", ...commonTransitions.on },
       keywords: {
         SPACE: ["space", "bigger", "large", "house"],
@@ -174,7 +176,7 @@ export const apartmentFinderMachine = {
 
     highLeaseFlexibility: {
       message: "Do you need short-term lease flexibility?",
-      fallback: "Please answer yes or no.",
+      fallback: "I am sorry, I didn't get that. Please answer yes or no.",
       on: { YES: "recommendServiced", NO: "recommendLuxuryLongTerm", ...commonTransitions.on },
       keywords: { ...commonTransitions.keywords },
       terminal: false
@@ -201,11 +203,11 @@ export const apartmentFinderMachine = {
     // ================================
     help: {
       message: "If you require human help, contact a rental advisor at: 1-800-APARTMENTS. Type help for this info, start/reset to begin again.",
-      fallback: "We’re at the end. Please reset to start again.",
-      on: { START: "root", ...commonTransitions.on },
+      fallback: "I can only assist with finding housing. Type start to begin again",
+      on: {  ...commonTransitions.on },
       keywords: {
         ...commonTransitions.keywords,
-        START: ["restart", "reset", "start", "begin"]
+        
       },
       terminal: false
     }
