@@ -4,7 +4,7 @@
 This chatbot acts as rental advisor, which guides the user through a series of questions to narrow down their preferences based on three main criteria: budget, lifestyle needs, and desired features. This chatbot uses a Finite State Machine and conversation can only be in one of a finite number of "states" at any given time. The bot transitions from one state to another based on the user's input.   Each state has: 
 - A message to send to the user.
 - A fallback message for when the user's input is not understood.
-- on transitions that map user intents (like YES, NO, LOW) to the next state.
+- on transitions that map user intents to the next state.
 - keywords to help interpret the user's raw input into a recognized intent.
 
 After reaching final states, it applies filters on apartments based on the attributes corresponding final to find apartments.
