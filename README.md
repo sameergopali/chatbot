@@ -1,4 +1,4 @@
-# eGain Project
+# eGain chatbot Project
 
 ## About
 This chatbot acts as rental advisor, which guides the user through a series of questions to narrow down their preferences based on three main criteria: budget, lifestyle needs, and desired features. This chatbot uses a Finite State Machine and conversation can only be in one of a finite number of "states" at any given time. The bot transitions from one state to another based on the user's input.   Each state has: 
@@ -20,12 +20,12 @@ Alternatively, follow steps below for local deployment:
 
 2. **Clone the repository**
     ```bash
-    git clone https://github.com/sameergopali/egain.git
+    git clone https://github.com/sameergopali/chatbot.git
     ```
 
 3. **Navigate to the project directory**
     ```bash
-    cd egain
+    cd chatbot
     ```
 4. **Install dependencies**
     ```bash
