@@ -233,7 +233,7 @@ export const apartments=  [
     "id": 2,
     "name": "Maplewood Shared House",
     "budget": "low",
-    "roommates": true,
+    "roommates": false,
     "location": "suburb",
     "building": "old",
     "amenities": ["none"],
