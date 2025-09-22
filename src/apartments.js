@@ -309,7 +309,19 @@ export const apartments=  [
     "lease": "short-term",
     "price": 3500,
     "beds": 1
-  }
+  },  
+  {
+    "id": 9,
+    "name": "Downtown Macro-Loft",
+    "budget": "low",
+    "roommates": false,
+    "location": "downtown",
+    "building": "modern",
+    "amenities": ["shared laundry"],
+    "lease": "long-term",
+    "price": 900,
+    "beds": 1
+  },
 ]
 
 
