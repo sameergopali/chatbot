@@ -4,8 +4,6 @@ class StateMachine {
    * Creates an instance of the state machine.
    *
    * @param {Object} config - The configuration object for the state machine.
-   * @param {Object} config.states - An object representing the possible states and their configurations.
-   * @param {string} config.initial - The name of the initial state.
    */
   constructor(config) {
     this.states = config.states;
