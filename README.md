@@ -7,7 +7,7 @@ This chatbot acts as rental advisor, which guides the user through a series of q
 - on transitions that map user intents to the next state.
 - keywords to help interpret the user's raw input into a recognized intent.
 
-After reaching final states, it applies filters on apartments based on the attributes corresponding final to find apartments.
+After reaching final states, it applies filters on apartments based on the attributes corresponding final state to find apartments.
 
 ## Tech Stack
 This is a static page built with React and JavaScript, with styling handled via Tailwind CSS.
